@@ -1,38 +1,57 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "./style.css"
-import Format from "../utility/format.js";
-export default function Questions() {
+// import Format from "../utility/format.js";
+import Format1 from "../utility/format1.js";
 
-  return (
-    <div className="que" >
-      <Format 
-      que="Which is the hottest planet in our solar system ?"
-      option1={{
-        value:"earth",
-        clicked:"false"
-      }}
-      option2={{
-        value:"mars",
-        clicked:"false"
-      }}
-      option3={{
-        value:"venus",
-        clicked:"false"
-      }}
-      option4={{
-        value:"saturn",
-        clicked:"false"
-      }}
-      correct="earth"
-      />
-      
+const Questions = (props)=>{
+  console.log(props.data.results);
+  
+  const allquestions = props.data.results.map(x => x.question);
+  console.log(allquestions);
+  const alloptions = props.data.results.map(x=> [x.correct_answer,...x.incorrect_answers]);
+  console.log(alloptions);
+  const correct_option =props.data.results.map(x=> x.correct_answer);
+  console.log(correct_option);
+  // let ques =0;
 
-       
-        <div className="main">
-        <Link to="/final">Check Answers</Link>
-        </div>
+//   const result = allquestions.reduce(function(arr, v, i) {
+//     return arr.concat(v, alloptions[i]); 
+//  }, []);
+  // console.log(result);
+  const [selected,setSelected] = React.useState(-1);
+
+  var result = [];
+  for (var i = 0; i < allquestions.length; i++) {
+    result.push( <Format1
+      quest = {allquestions[i]}
+      alloptions = {alloptions[i]}
+      correct_option = {correct_option[i]}
+      score = {props.score}
+      setScore = {props.setScore}
+      selected = {selected}
+      setSelected = {setSelected}
+      />);
+  }
+  console.log(result);
+  
+  const final = result.map((x)=>{
+    return(
+      <h1>{x}</h1>
+    )
+  })
+    return (
+      <div>
+        {final}
+        <button > <Link to="/final">Check Answers</Link></button>
+      </div>
+           )
+    //  return(
+    //   <div className="main">
+    //       <button > <Link to="/final">Check Answers</Link></button>
         
-    </div>
-  );
+    // </div>
+    //  )
 }
+export default Questions;
+

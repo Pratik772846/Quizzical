@@ -6,92 +6,45 @@ export default function Format(props){
     const [active2,setActive2] = React.useState(false);
     const [active3,setActive3] = React.useState(false);
     const [active4,setActive4] = React.useState(false);
-    const [index,setIndex] = React.useState(0);
-
+    const [active,setActive]= React.useState(false);
+    const [index,setIndex] = React.useState(-1);
+    // const [score,setScore]= React.useState(0);
+  
+//   function handleOptionClick(option,correct){
+//     if(option===correct){
+//      props.setScore(props.score+1);
+//     }
+// }
+    
     function handleClick1(){
-        if(active2 && !active3 && !active4){
-            setActive2(!active2);
-            setActive1(!active1);
-            setIndex(1);
-        }
-        else if(!active2 && active3 && !active4){
-            setActive3(!active3);
-            setActive1(!active1);
-            setIndex(1);
-        }
-        else if(!active2 && !active3 && active4){
-            setActive4(!active4);
-            setActive1(!active1);
-            setIndex(1);
-        }
-        else if(!active2 && !active3 && !active4){
-            setActive1(!active1);
+        if(!active){
+            setActive(prev=>!prev);
+            setActive1(prev=>!prev);
             setIndex(1);
         }
     }
     function handleClick2(){
-        if(active1 && !active3 && !active4){
-            setActive1(!active1);
-            setActive2(!active2);
+        if(!active){
+            setActive(prev=>!prev);
+            setActive2(prev=>!prev);
             setIndex(2);
         }
-        else if(!active1 && active3 && !active4){
-            setActive3(!active3);
-            setActive2(!active2);
-            setIndex(2);
-        }
-        else if(!active1 && !active3 && active4){
-            setActive4(!active4);
-            setActive2(!active2);
-            setIndex(2);
-        }
-        else if(!active1 && !active3 && !active4){
-            setActive2(!active2);
-            setIndex(2);
-        }
-      }
-      function handleClick3(){
-        if(active2 && !active1 && !active4){
-            setActive2(!active2);
-            setActive3(!active3);
+    }
+    function handleClick3(){
+        if(!active){
+            setActive(prev=>!prev);
+            setActive3(prev=>!prev);
             setIndex(3);
         }
-        else if(!active2 && active1 && !active4){
-            setActive1(!active1);
-            setActive3(!active3);
-            setIndex(3);
-        }
-        else if(!active2 && !active1 && active4){
-            setActive4(!active4);
-            setActive3(!active3);
-            setIndex(3);
-        }
-        else if(!active2 && !active1 && !active4){
-            setActive3(!active3);
-            setIndex(3);
-        }
-      }
-      function handleClick4(){
-        if(active2 && !active3 && !active1){
-            setActive2(!active2);
-            setActive4(!active4);
+    }
+    function handleClick4(){
+        if(!active){
+            setActive(prev=>!prev);
+            setActive4(prev=>!prev);
             setIndex(4);
         }
-        else if(!active2 && active3 && !active1){
-            setActive3(!active3);
-            setActive4(!active4);
-            setIndex(4);
-        }
-        else if(!active2 && !active3 && active1){
-            setActive1(!active1);
-            setActive4(!active4);
-            setIndex(4);
-        }
-        else if(!active2 && !active3 && !active1){
-            setActive4(!active4);
-            setIndex(4);
-        }
-      }
+    }
+    
       console.log(index);
     return(
         <div className="qanda">
