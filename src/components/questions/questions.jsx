@@ -1,10 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "./style.css"
-// import Format from "../utility/format.js";
 import Format1 from "../utility/format1.js";
 
 const Questions = (props)=>{
+
+  // const [allquestionsdone, setAllquestionsdone] = React.useState(0);
   console.log(props.data.results);
   
   const allquestions = props.data.results.map(x => x.question);
@@ -13,12 +14,7 @@ const Questions = (props)=>{
   console.log(alloptions);
   const correct_option =props.data.results.map(x=> x.correct_answer);
   console.log(correct_option);
-  // let ques =0;
 
-//   const result = allquestions.reduce(function(arr, v, i) {
-//     return arr.concat(v, alloptions[i]); 
-//  }, []);
-  // console.log(result);
   const [selected,setSelected] = React.useState(-1);
 
   var result = [];
@@ -31,8 +27,11 @@ const Questions = (props)=>{
       setScore = {props.setScore}
       selected = {selected}
       setSelected = {setSelected}
+      // allquestionsdone = {allquestionsdone}
+      // setAllquetionsdone = {setAllquestionsdone}
       />);
   }
+
   console.log(result);
   
   const final = result.map((x)=>{
@@ -40,18 +39,22 @@ const Questions = (props)=>{
       <h1>{x}</h1>
     )
   })
+
+
+    // function Check(){
+    //   if(allquestionsdone===allquestions.length){
+    //     return (<button > <Link to="/final">Check Answers</Link></button>);
+    //   }
+    // }
+    
+    
     return (
       <div>
         {final}
+        {/* <Check/> */}
         <button > <Link to="/final">Check Answers</Link></button>
       </div>
            )
-    //  return(
-    //   <div className="main">
-    //       <button > <Link to="/final">Check Answers</Link></button>
-        
-    // </div>
-    //  )
 }
 export default Questions;
 

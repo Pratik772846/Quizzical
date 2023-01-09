@@ -3,7 +3,6 @@ import './App.css';
 import {Routes, Route,BrowserRouter,Switch} from 'react-router-dom';
 import Home from './components/homepage/homepage.jsx';
 import Questions from "./components/questions/questions.jsx";
-// import Questions from "./components/questions/Question.js";
 import Final from "./components/final/final.jsx";
 import axios from 'axios';
 
@@ -17,8 +16,6 @@ function App() {
   React.useEffect(() => {
     axios.get(URL).then((res) => {
       setData(res.data);
-      // console.log(res.data);
-      // console.log(res.data.results[0].question)
     });
   }, []);
 
@@ -37,16 +34,8 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<Home />} />
-      {/* <Route path="/questions" element={<Questions score={score} setScore={setScore} questions={data} setQuestions ={setData}/>} /> */}
-      <Route path="/questions" element={<Questions score={score} setScore={setScore} data={data} setData ={setData}/>} />
-      {/* <Route path="/questions">
-          <Questions score={score} setScore={setScore}/>
-      </Route> */}
-            
-      <Route path ="/final" element={<Final score={score}/>} />
-      {/* <Route path="/final">
-            <Final  score={score} />
-      </Route> */}
+      <Route path="/questions" element={<Questions score={score} setScore={setScore} data={data} setData ={setData}/>} />            
+      <Route path ="/final" element={<Final score={score} setScore={setScore}/>} />
     </Routes>
     </>
       
