@@ -2,20 +2,49 @@ import React from "react";
 import {Link} from "react-router-dom";
 import "./style.css"
 import Format1 from "../utility/format1.js";
+import axios from "axios";
 
 const Questions = (props)=>{
+  const URL = "http://opentdb.com/api.php?amount=6&category=19&difficulty=easy&type=multiple";
+  const [data,setData] = React.useState({});
+  const [loading,setLoading] = React.useState(true);
+  const [selected,setSelected] = React.useState(-1);
+  
+  const getData = async () => {
+    try{
+      // setLoading(true);
+    const response = await axios.get(URL);
+    console.log(response);
+    console.log(response.data);
+    setData(response.data);
+    setLoading(false);
+  }
+    catch(err){
+      console.log(err);
+    }
+    
+  };
+  React.useEffect(() => {
+      getData();
+  }, []);
+
+  console.log(loading);
+  if(loading){
+    return <p>Data is loading....</p>
+  }
+  
 
   // const [allquestionsdone, setAllquestionsdone] = React.useState(0);
-  console.log(props.data.results);
+  // console.log(data.results);
   
-  const allquestions = props.data.results.map(x => x.question);
+  const allquestions = data.results.map(x => x.question);
   console.log(allquestions);
-  const alloptions = props.data.results.map(x=> [x.correct_answer,...x.incorrect_answers]);
+  const alloptions = data.results.map(x=> [x.correct_answer,...x.incorrect_answers]);
   console.log(alloptions);
-  const correct_option =props.data.results.map(x=> x.correct_answer);
+  const correct_option =data.results.map(x=> x.correct_answer);
   console.log(correct_option);
 
-  const [selected,setSelected] = React.useState(-1);
+  
 
   var result = [];
   for (var i = 0; i < allquestions.length; i++) {
@@ -51,7 +80,6 @@ const Questions = (props)=>{
     return (
       <div>
         {final}
-        {/* <Check/> */}
         <button > <Link to="/final">Check Answers</Link></button>
       </div>
            )
